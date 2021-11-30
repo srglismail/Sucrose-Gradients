@@ -1,0 +1,89 @@
+---
+title: "Sucrose Gradients Analysis"
+date: "2021-11-30"
+output: github_document
+author: "Ismail Sarigül"
+---
+
+
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+library(readr)
+```
+
+
+```{r}
+WT1 <- read_delim("Data/measurements_21-11-30_08-52-11 WT Keio OD600 0_5.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+WT1 <- mutate(WT1, Strain="WT Keio", Sample = "exp1")
+
+```
+
+```{r}
+WT2 <- read_delim("Data/measurements_21-11-30_08-59-00 WT Keio OD600 0_5 plus 1hour.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+WT2 <- mutate(WT2, Strain="WT Keio", Sample = "exp2")
+```
+
+```{r}
+WT3 <- read_delim("Data/measurements_21-11-30_09-04-59 WT Keio OD600 0_5 plus 2hours.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+WT3 <- mutate(WT3, Strain="WT Keio", Sample = "stat1")
+```
+
+```{r}
+ybeX1 <- read_delim("Data/measurements_21-11-30_09-12-12 ybeX OD600 0_5.lvm",
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+ybeX1 <- mutate(ybeX1, Strain="ybeX", Sample = "exp1")
+```
+
+```{r}
+ybeX2 <- read_delim("Data/measurements_21-11-30_09-18-33 ybeX OD600 0_5 plus 1hour.lvm",
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+ybeX2 <- mutate(ybeX2, Strain="ybeX", Sample = "exp2")
+```
+```{r}
+ybeX3 <- read_delim("Data/measurements_21-11-30_09-24-57 ybeX OD600 0_5 plus 2hours.lvm",
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+ybeX3 <- mutate(ybeX3, Strain="ybeX", Sample = "stat1")
+```
+
+
+```{r}
+bindall <- rbind(WT1, WT2, WT3, ybeX1, ybeX2, ybeX3)
+```
+
+
+```{r}
+ggplot(data=bindall)+
+    geom_line(aes(Time,Signal, color=Strain))+
+  facet_wrap(~Sample)
+```
+
+
+
+
+
+
