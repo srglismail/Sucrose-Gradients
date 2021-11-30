@@ -84,6 +84,9 @@ ggplot(data=bindall)+
 
 
 
+```{r}
+ggsave(file = "WT ybeX gradients.pdf")
+```
 
 
 
