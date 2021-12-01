@@ -88,5 +88,35 @@ ggplot(data=bindall)+
 ggsave(file = "WT ybeX gradients.pdf")
 ```
 
+```{r}
+library(DescTools)
+```
+
+```{r}
+ggplot(data=WT1)+
+  geom_line(aes(Time,Signal))+
+  geom_vline(xintercept = c(50,120,170,205))
+```
+
+```{r}
+ggplot(data=ybeX1)+
+  geom_line(aes(Time,Signal))+
+  geom_vline(xintercept = c(40,115,165,193))
+```
+
+```{r}
+##70S/50S for WT Keio time point 1
+AUC(WT1$Time, WT1$Signal, from = min(50, na.rm = TRUE), to = max(120, na.rm = TRUE), method = c("trapezoid")) / AUC(WT1$Time, WT1$Signal, from = min(120, na.rm = TRUE), to = max(170, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/30S for WT Keio time point 1
+AUC(WT1$Time, WT1$Signal, from = min(50, na.rm = TRUE), to = max(120, na.rm = TRUE), method = c("trapezoid")) / AUC(WT1$Time, WT1$Signal, from = min(170, na.rm = TRUE), to = max(200, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/50S for ybeX time point 1
+AUC(ybeX1$Time, ybeX1$Signal, from = min(40, na.rm = TRUE), to = max(115, na.rm = TRUE), method = c("trapezoid")) / AUC(ybeX1$Time, ybeX1$Signal, from = min(115, na.rm = TRUE), to = max(165, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/30S for ybeX time point 1
+AUC(ybeX1$Time, ybeX1$Signal, from = min(40, na.rm = TRUE), to = max(115, na.rm = TRUE), method = c("trapezoid")) / AUC(ybeX1$Time, ybeX1$Signal, from = min(165, na.rm = TRUE), to = max(193, na.rm = TRUE), method = c("trapezoid"))
+
+```
 
 
