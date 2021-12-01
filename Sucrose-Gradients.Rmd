@@ -104,6 +104,7 @@ ggplot(data=ybeX1)+
   geom_vline(xintercept = c(40,115,165,193))
 ```
 
+
 ```{r}
 ##70S/50S for WT Keio time point 1
 AUC(WT1$Time, WT1$Signal, from = min(50, na.rm = TRUE), to = max(120, na.rm = TRUE), method = c("trapezoid")) / AUC(WT1$Time, WT1$Signal, from = min(120, na.rm = TRUE), to = max(170, na.rm = TRUE), method = c("trapezoid"))
@@ -119,4 +120,90 @@ AUC(ybeX1$Time, ybeX1$Signal, from = min(40, na.rm = TRUE), to = max(115, na.rm 
 
 ```
 
+
+```{r}
+ggplot(data=WT2)+
+  geom_line(aes(Time,Signal))+
+  geom_vline(xintercept = c(50,125,167,210))
+```
+
+```{r}
+ggplot(data=ybeX2)+
+  geom_line(aes(Time,Signal))+
+  geom_vline(xintercept = c(50,125,170,210))
+```
+
+```{r}
+##70S/50S for WT Keio time point 2
+AUC(WT2$Time, WT2$Signal, from = min(50, na.rm = TRUE), to = max(125, na.rm = TRUE), method = c("trapezoid")) / AUC(WT2$Time, WT2$Signal, from = min(125, na.rm = TRUE), to = max(167, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/30S for WT Keio time point 2
+AUC(WT2$Time, WT2$Signal, from = min(50, na.rm = TRUE), to = max(125, na.rm = TRUE), method = c("trapezoid")) / AUC(WT2$Time, WT2$Signal, from = min(167, na.rm = TRUE), to = max(210, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/50S for ybeX time point 2
+AUC(ybeX2$Time, ybeX2$Signal, from = min(50, na.rm = TRUE), to = max(125, na.rm = TRUE), method = c("trapezoid")) / AUC(ybeX2$Time, ybeX2$Signal, from = min(125, na.rm = TRUE), to = max(170, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/30S for ybeX time point 2
+AUC(ybeX2$Time, ybeX2$Signal, from = min(50, na.rm = TRUE), to = max(125, na.rm = TRUE), method = c("trapezoid")) / AUC(ybeX2$Time, ybeX2$Signal, from = min(170, na.rm = TRUE), to = max(210, na.rm = TRUE), method = c("trapezoid"))
+```
+
+```{r}
+ggplot(data=WT3)+
+  geom_line(aes(Time,Signal))+
+  geom_vline(xintercept = c(50,125,167,210))
+```
+
+```{r}
+ggplot(data=ybeX3)+
+  geom_line(aes(Time,Signal))+
+  geom_vline(xintercept = c(50,125,170,210))
+```
+
+
+```{r}
+##70S/50S for WT Keio time point 3
+AUC(WT3$Time, WT3$Signal, from = min(50, na.rm = TRUE), to = max(125, na.rm = TRUE), method = c("trapezoid")) / AUC(WT3$Time, WT3$Signal, from = min(125, na.rm = TRUE), to = max(167, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/30S for WT Keio time point 3
+AUC(WT3$Time, WT3$Signal, from = min(50, na.rm = TRUE), to = max(125, na.rm = TRUE), method = c("trapezoid")) / AUC(WT3$Time, WT3$Signal, from = min(167, na.rm = TRUE), to = max(210, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/50S for ybeX time point 3
+AUC(ybeX3$Time, ybeX3$Signal, from = min(50, na.rm = TRUE), to = max(125, na.rm = TRUE), method = c("trapezoid")) / AUC(ybeX3$Time, ybeX3$Signal, from = min(125, na.rm = TRUE), to = max(170, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/30S for ybeX time point 3
+AUC(ybeX3$Time, ybeX3$Signal, from = min(50, na.rm = TRUE), to = max(125, na.rm = TRUE), method = c("trapezoid")) / AUC(ybeX3$Time, ybeX3$Signal, from = min(170, na.rm = TRUE), to = max(210, na.rm = TRUE), method = c("trapezoid"))
+```
+
+
+
+
+
+```{r}
+data1 <- data.frame(value = c(2.138253,3.965895,2.437277,4.898136) , 
+                   Strain = c("WT","WT","ybeX", "ybeX"), 
+                   Ribo = c("70S_50S","70S_30S","70S_50S","70S_30S"),
+                   Experiment = "exp1")
+data2 <- data.frame(value = c(3.22541,3.338626,3.057081,3.974106) , 
+                   Strain = c("WT","WT","ybeX", "ybeX"), 
+                   Ribo = c("70S_50S","70S_30S","70S_50S","70S_30S"),
+                   Experiment= "exp2")
+data3 <- data.frame(value = c(5.058683,4.997034,3.480473,4.816032) , 
+                   Strain = c("WT","WT","ybeX", "ybeX"), 
+                   Ribo = c("70S_50S","70S_30S","70S_50S","70S_30S"),
+                   Experiment = "stat1")
+databind <- rbind(data1, data2, data3)
+```
+
+
+```{r}
+databind %>%
+  ggplot + 
+  aes(x = Experiment, y = value, fill = Ribo) + 
+  geom_col(position = "dodge")+
+  facet_wrap(~ Strain)
+```
+
+```{r}
+ggsave(file = "WT ybeX gradients quant.pdf", width = 5, height = 4)
+```
 
