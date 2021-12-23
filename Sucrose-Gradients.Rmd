@@ -447,10 +447,35 @@ AUC(ybeY40$Time, ybeY40$Signal, from = min(60, na.rm = TRUE), to = max(105, na.r
 AUC(ybeY40$Time, ybeY40$Signal, from = min(60, na.rm = TRUE), to = max(105, na.rm = TRUE), method = c("trapezoid")) / AUC(ybeY40$Time, ybeY40$Signal, from = min(160, na.rm = TRUE), to = max(205, na.rm = TRUE), method = c("trapezoid"))
 
 ```
+
+```{r}
+ggplot(data=WTv40)+
+  geom_line(aes(Time,Signal))+
+  geom_vline(xintercept = c(40,112,155,200))
+```
+
+```{r}
+##70S for WT Keio time point 40 
+AUC(WTv40$Time, WTv40$Signal, from = min(40, na.rm = TRUE), to = max(112, na.rm = TRUE), method = c("trapezoid"))
+##50S for WT Keio time point 40
+AUC(WTv40$Time, WTv40$Signal, from = min(112, na.rm = TRUE), to = max(155, na.rm = TRUE), method = c("trapezoid"))
+##30S for WT Keio time point 40
+AUC(WTv40$Time, WTv40$Signal, from = min(155, na.rm = TRUE), to = max(200, na.rm = TRUE), method = c("trapezoid"))
+```
+
 ```{r}
 ggplot(data=ybeYv40)+
   geom_line(aes(Time,Signal))+
   geom_vline(xintercept = c(50,95,155,205))
+```
+
+```{r}
+#70S for ybeY at 40C
+AUC(ybeYv40$Time, ybeYv40$Signal, from = min(50, na.rm = TRUE), to = max(95, na.rm = TRUE), method = c("trapezoid")) 
+#50S for ybeY at 40C
+AUC(ybeYv40$Time, ybeYv40$Signal, from = min(95, na.rm = TRUE), to = max(155, na.rm = TRUE), method = c("trapezoid"))
+#30S for ybeY at 40C
+AUC(ybeYv40$Time, ybeYv40$Signal, from = min(155, na.rm = TRUE), to = max(205, na.rm = TRUE), method = c("trapezoid"))
 ```
 
 ```{r}
@@ -510,4 +535,196 @@ binddata2_3 %>%
 ```{r}
 ggsave(file = "WT ybeX gradients37_40.pdf")
 ```
+
+```{r}
+df1WT37 <- read_delim("Data2/measurements_21-12-16_09-13-57.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df1WT37 <- mutate(df1WT37, Strain="WT Keio", 
+                  Sample = "37C",Date="2021-12-16")
+```
+```{r}
+df1WT43 <- read_delim("Data2/measurements_21-12-16_09-19-52.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df1WT43 <- mutate(df1WT43, Strain="WT Keio", 
+                  Sample = "43C",Date="2021-12-16")
+```
+```{r}
+df1ybeX37 <- read_delim("Data2/measurements_21-12-16_09-25-34.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df1ybeX37 <- mutate(df1ybeX37, Strain="ybeX", 
+                  Sample = "37C",Date="2021-12-16")
+```
+```{r}
+df1ybeX43 <- read_delim("Data2/measurements_21-12-16_09-31-24.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df1ybeX43 <- mutate(df1ybeX43, Strain="ybeX", 
+                  Sample = "43C",Date="2021-12-16")
+```
+
+```{r}
+df1ybeY37 <- read_delim("Data2/measurements_21-12-16_09-38-53.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df1ybeY37 <- mutate(df1ybeY37, Strain="ybeY", 
+                  Sample = "37C",Date="2021-12-16")
+```
+```{r}
+df1ybeY43 <- read_delim("Data2/measurements_21-12-16_09-45-05.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df1ybeY43 <- mutate(df1ybeY43, Strain="ybeY", 
+                  Sample = "43C",Date="2021-12-16")
+```
+
+```{r}
+df1rbind <- rbind(df1ybeY37,df1ybeY43,df1WT37,df1WT43,df1ybeX37,df1ybeX43)
+```
+
+
+```{r}
+df1rbind %>% ggplot()+
+    geom_line(aes(Time,Signal, color=Sample))+
+    facet_wrap(~Strain)
+```
+
+```{r}
+ggplot(data=df1ybeY37)+
+  geom_line(aes(Time,Signal))+
+  geom_vline(xintercept = c(40,87,150,200))
+```
+
+```{r}
+##70S/50S for WT Keio time point 37
+AUC(df1WT37$Time, df1WT37$Signal, from = min(40, na.rm = TRUE), to = max(105, na.rm = TRUE), method = c("trapezoid")) / AUC(df1WT37$Time, df1WT37$Signal, from = min(105, na.rm = TRUE), to = max(155, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/30S for WT Keio time point 37
+AUC(df1WT37$Time, df1WT37$Signal, from = min(40, na.rm = TRUE), to = max(105, na.rm = TRUE), method = c("trapezoid")) / AUC(df1WT37$Time, df1WT37$Signal, from = min(155, na.rm = TRUE), to = max(205, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/50S for ybeX time point 37
+AUC(df1ybeX37$Time, df1ybeX37$Signal, from = min(40, na.rm = TRUE), to = max(105, na.rm = TRUE), method = c("trapezoid")) / AUC(df1ybeX37$Time, df1ybeX37$Signal, from = min(105, na.rm = TRUE), to = max(155, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/30S for ybeX time point 37
+AUC(df1ybeX37$Time, df1ybeX37$Signal, from = min(40, na.rm = TRUE), to = max(105, na.rm = TRUE), method = c("trapezoid")) / AUC(df1ybeX37$Time, df1ybeX37$Signal, from = min(155, na.rm = TRUE), to = max(205, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/50S for ybeY time point 37  40,87,150,200
+AUC(df1ybeY37$Time, df1ybeY37$Signal, from = min(40, na.rm = TRUE), to = max(87, na.rm = TRUE), method = c("trapezoid")) / AUC(df1ybeY37$Time, df1ybeY37$Signal, from = min(87, na.rm = TRUE), to = max(150, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/30S for ybeY time point 37
+AUC(df1ybeY37$Time, df1ybeY37$Signal, from = min(40, na.rm = TRUE), to = max(87, na.rm = TRUE), method = c("trapezoid")) / AUC(df1ybeY37$Time, df1ybeY37$Signal, from = min(150, na.rm = TRUE), to = max(200, na.rm = TRUE), method = c("trapezoid"))
+
+```
+
+```{r}
+ggplot(data=df1ybeY43)+
+  geom_line(aes(Time,Signal))+
+  geom_vline(xintercept = c(50,90,155,200))
+```
+
+
+```{r}
+##70S/50S for WT Keio time point 43
+AUC(df1WT43$Time, df1WT43$Signal, from = min(40, na.rm = TRUE), to = max(105, na.rm = TRUE), method = c("trapezoid")) / AUC(df1WT43$Time, df1WT43$Signal, from = min(105, na.rm = TRUE), to = max(155, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/30S for WT Keio time point 43
+AUC(df1WT43$Time, df1WT43$Signal, from = min(40, na.rm = TRUE), to = max(105, na.rm = TRUE), method = c("trapezoid")) / AUC(df1WT43$Time, df1WT43$Signal, from = min(155, na.rm = TRUE), to = max(200, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/50S for ybeX time point 43     40,100,155,200
+AUC(df1ybeX43$Time, df1ybeX43$Signal, from = min(40, na.rm = TRUE), to = max(100, na.rm = TRUE), method = c("trapezoid")) / AUC(df1ybeX43$Time, df1ybeX43$Signal, from = min(100, na.rm = TRUE), to = max(155, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/30S for ybeX time point 43
+AUC(df1ybeX43$Time, df1ybeX43$Signal, from = min(40, na.rm = TRUE), to = max(100, na.rm = TRUE), method = c("trapezoid")) / AUC(df1ybeX43$Time, df1ybeX43$Signal, from = min(155, na.rm = TRUE), to = max(200, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/50S for ybeY time point 43    50,90,155,200
+AUC(df1ybeY43$Time, df1ybeY43$Signal, from = min(50, na.rm = TRUE), to = max(90, na.rm = TRUE), method = c("trapezoid")) / AUC(df1ybeY43$Time, df1ybeY43$Signal, from = min(90, na.rm = TRUE), to = max(155, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/30S for ybeY time point 43
+AUC(df1ybeY43$Time, df1ybeY43$Signal, from = min(50, na.rm = TRUE), to = max(90, na.rm = TRUE), method = c("trapezoid")) / AUC(df1ybeY43$Time, df1ybeY43$Signal, from = min(155, na.rm = TRUE), to = max(200, na.rm = TRUE), method = c("trapezoid"))
+
+```
+```{r}
+df2WT37 <- read_delim("Data3/measurements_21-12-22_09-50-34.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df2WT37 <- mutate(df2WT37, Strain="WT Keio", 
+                  Sample = "37C",Date="2021-12-22")
+```
+```{r}
+df2WT43 <- read_delim("Data3/measurements_21-12-22_09-56-24.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df2WT43 <- mutate(df2WT43, Strain="WT Keio", 
+                  Sample = "43C",Date="2021-12-22")
+```
+```{r}
+df2ybeX37 <- read_delim("Data3/measurements_21-12-22_10-02-27.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df2ybeX37 <- mutate(df2ybeX37, Strain="ybeX", 
+                  Sample = "37C",Date="2021-12-22")
+```
+```{r}
+df2ybeX43 <- read_delim("Data3/measurements_21-12-22_10-08-03.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df2ybeX43 <- mutate(df2ybeX43, Strain="ybeX", 
+                  Sample = "43C",Date="2021-12-22")
+```
+```{r}
+df2ybeY37 <- read_delim("Data3/measurements_21-12-22_10-15-20.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df2ybeY37 <- mutate(df2ybeY37, Strain="ybeY", 
+                  Sample = "37C",Date="2021-12-22")
+```
+```{r}
+df2ybeY43 <- read_delim("Data3/measurements_21-12-22_10-21-26.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df2ybeY43 <- mutate(df2ybeY43, Strain="ybeY", 
+                  Sample = "43C",Date="2021-12-22")
+```
+```{r}
+df2rbind <- rbind(df2WT37,df2WT43,df2ybeX37,df2ybeX43,df2ybeY37,df2ybeY43)
+```
+
+```{r}
+df2rbind %>% ggplot()+
+    geom_line(aes(Time,Signal, color=Sample))+
+    facet_wrap(~Strain)
+```
+```{r}
+rbind(df1rbind,df2rbind) %>% ggplot()+
+    geom_line(aes(Time,Signal, color=Sample))+
+    facet_wrap(Date~Strain)
+```
+
+
 
