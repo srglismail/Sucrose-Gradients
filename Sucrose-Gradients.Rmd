@@ -22,7 +22,7 @@ WT1 <- read_delim("Data/measurements_21-11-30_08-52-11 WT Keio OD600 0_5.lvm",
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
     col_select = c("Time", "Signal"))
-WT1 <- mutate(WT1, Strain="WT Keio", Sample = "exp1")
+WT1 <- mutate(WT1, Strain="WT Keio", Sample = "exp1", Date="2021-11-30")
 
 ```
 
@@ -32,7 +32,7 @@ WT2 <- read_delim("Data/measurements_21-11-30_08-59-00 WT Keio OD600 0_5 plus 1h
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
     col_select = c("Time", "Signal"))
-WT2 <- mutate(WT2, Strain="WT Keio", Sample = "exp2")
+WT2 <- mutate(WT2, Strain="WT Keio", Sample = "exp2", Date="2021-11-30")
 ```
 
 ```{r}
@@ -41,7 +41,7 @@ WT3 <- read_delim("Data/measurements_21-11-30_09-04-59 WT Keio OD600 0_5 plus 2h
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
     col_select = c("Time", "Signal"))
-WT3 <- mutate(WT3, Strain="WT Keio", Sample = "stat1")
+WT3 <- mutate(WT3, Strain="WT Keio", Sample = "stat1", Date="2021-11-30")
 ```
 
 ```{r}
@@ -50,7 +50,7 @@ ybeX1 <- read_delim("Data/measurements_21-11-30_09-12-12 ybeX OD600 0_5.lvm",
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
     col_select = c("Time", "Signal"))
-ybeX1 <- mutate(ybeX1, Strain="ybeX", Sample = "exp1")
+ybeX1 <- mutate(ybeX1, Strain="ybeX", Sample = "exp1", Date="2021-11-30")
 ```
 
 ```{r}
@@ -59,7 +59,7 @@ ybeX2 <- read_delim("Data/measurements_21-11-30_09-18-33 ybeX OD600 0_5 plus 1ho
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
     col_select = c("Time", "Signal"))
-ybeX2 <- mutate(ybeX2, Strain="ybeX", Sample = "exp2")
+ybeX2 <- mutate(ybeX2, Strain="ybeX", Sample = "exp2", Date="2021-11-30")
 ```
 ```{r}
 ybeX3 <- read_delim("Data/measurements_21-11-30_09-24-57 ybeX OD600 0_5 plus 2hours.lvm",
@@ -67,7 +67,7 @@ ybeX3 <- read_delim("Data/measurements_21-11-30_09-24-57 ybeX OD600 0_5 plus 2ho
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
     col_select = c("Time", "Signal"))
-ybeX3 <- mutate(ybeX3, Strain="ybeX", Sample = "stat1")
+ybeX3 <- mutate(ybeX3, Strain="ybeX", Sample = "stat1", Date="2021-11-30")
 ```
 
 
@@ -77,7 +77,7 @@ bindall <- rbind(WT1, WT2, WT3, ybeX1, ybeX2, ybeX3)
 
 
 ```{r}
-ggplot(data=bindall)+
+rbind(WT3,ybeX3) %>% ggplot()+
     geom_line(aes(Time,Signal, color=Strain))+
   facet_wrap(~Sample)
 ```
@@ -720,11 +720,236 @@ df2rbind %>% ggplot()+
     geom_line(aes(Time,Signal, color=Sample))+
     facet_wrap(~Strain)
 ```
+
 ```{r}
-rbind(df1rbind,df2rbind) %>% ggplot()+
-    geom_line(aes(Time,Signal, color=Sample))+
-    facet_wrap(Date~Strain)
+library(cowplot)
 ```
 
 
+```{r}
+ df2rbind %>% ggplot()+
+    geom_line(aes(Time,Signal, color=Strain))+
+    facet_wrap(~Sample)+
+  theme_cowplot()
+```
+```{r}
+df3WT <- read_delim("Data4/measurements_18-06-02_11-11-54 WT Keio 2hours after OD600 0_3.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df3WT <- mutate(df3WT, Strain="WT", 
+                  Sample = "37C",Date="2018-06-02")
+```
+
+```{r}
+df3WTCAM <- read_delim("Data4/measurements_18-06-02_11-18-46 WT Keio CAM 2hours.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df3WTCAM <- mutate(df3WTCAM, Strain="WT", 
+                  Sample = "CAM",Date="2018-06-02")
+```
+```{r}
+df3yjeQ <- read_delim("Data4/measurements_18-06-02_11-37-30 yjeQ 2hour plus OD600 0_3.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df3yjeQ <- mutate(df3yjeQ, Strain="yjeQ", 
+                  Sample = "37C",Date="2018-06-02")
+```
+
+```{r}
+df3yjeQCAM <- read_delim("Data4/measurements_18-06-02_11-43-11 yjeQ CAM 2hour.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df3yjeQCAM <- mutate(df3yjeQCAM, Strain="yjeQ", 
+                  Sample = "CAM",Date="2018-06-02")
+```
+
+rbind(df3yjeQ,df3yjeQCAM) %>% ggplot()+
+geom_line(aes(Time,Signal, color=Sample))+
+  ggthemes::theme_pander()
+
+```{r}
+df4WT <- read_delim("Data5/measurements_21-12-24_10-42-56.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df4WT <- mutate(df4WT, Strain="WT", 
+                  Sample = "2hourplus",Date="2021-12-24")
+
+df4WTCam <- read_delim("Data5/measurements_21-12-24_11-01-58.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df4WTCam <- mutate(df4WTCam, Strain="WT", 
+                  Sample = "CAM",Date="2021-12-24")
+
+df4yjeQ <- read_delim("Data5/measurements_21-12-24_10-48-46.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df4yjeQ <- mutate(df4yjeQ, Strain="yjeQ", 
+                  Sample = "2hourplus",Date="2021-12-24")
+
+df4yjeQCam <- read_delim("Data5/measurements_21-12-24_11-07-41.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df4yjeQCam <- mutate(df4yjeQCam, Strain="yjeQ", 
+                  Sample = "CAM",Date="2021-12-24")
+
+df4rbfA <- read_delim("Data5/measurements_21-12-24_10-54-53.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df4rbfA <- mutate(df4rbfA, Strain="rbfA", 
+                  Sample = "2hourplus",Date="2021-12-24")
+
+df4rbfACam <- read_delim("Data5/measurements_21-12-24_11-13-45.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df4rbfACam <- mutate(df4rbfACam, Strain="rbfA", 
+                  Sample = "CAM",Date="2021-12-24")
+
+```
+
+df4WT,df4WTCam,
+```{r}
+ rbind(df4yjeQ,df4yjeQCam) %>% ggplot()+
+    geom_line(aes(Time,Signal, color=Sample))+
+    facet_wrap(~Strain)+
+  theme_cowplot()
+```
+
+```{r}
+ rbind(df4rbfA,df4rbfACam) %>% ggplot()+
+    geom_line(aes(Time,Signal),size=1.5)+
+  facet_wrap(~Sample)+
+  labs(y="AU260", 
+       x="Time (second)", 
+       title="Sucrose Gradients of RbfA Deletion strain") +
+   theme_bw()
+```
+
+```{r}
+ggsave("A1_rbfA deletion gradient.pdf", width = 6, height = 5)
+```
+
+```{r}
+ rbind(df4yjeQ,df4yjeQCam) %>% ggplot()+
+    geom_line(aes(Time,Signal),size=1.5)+
+  facet_wrap(~Sample)+
+  labs(y="AU260", 
+       x="Time (second)", 
+       title="Sucrose Gradients of yjeQ Deletion strain") +
+   theme_bw()
+```
+
+```{r}
+ggsave("A2_yjeQ deletion gradient.pdf", width = 6, height = 5)
+```
+
+```{r}
+ rbind(df4WT,df4WTCam) %>% ggplot()+
+    geom_line(aes(Time,Signal),size=1.5)+
+  facet_wrap(~Sample)+
+  labs(y="AU260", 
+       x="Time (second)", 
+       title="Sucrose Gradients of WT Keio strain") +
+   theme_bw()
+```
+```{r}
+ggsave("A3_WT Keio gradient.pdf", width = 6, height = 5)
+```
+
+```{r}
+df5WT <- read_delim("Data6/measurements_21-12-30_10-32-53.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df5WT <- mutate(df5WT, Strain="WT", 
+                  Sample = "2hourplus",Date="2021-12-30")
+
+df5WTCam <- read_delim("Data6/measurements_21-12-30_10-39-29.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df5WTCam <- mutate(df5WTCam, Strain="WT", 
+                  Sample = "CAM",Date="2021-12-30")
+
+df5WTeryth <- read_delim("Data6/measurements_21-12-30_10-45-15.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df5WTeryth <- mutate(df5WTeryth, Strain="WT", 
+                  Sample = "ERYTH",Date="2021-12-30")
+
+df5ybeY <- read_delim("Data6/measurements_21-12-30_10-52-03.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df5ybeY <- mutate(df5ybeY, Strain="ybeY", 
+                  Sample = "2hourplus",Date="2021-12-30")
+
+df5ybeYCam <- read_delim("Data6/measurements_21-12-30_10-58-01.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df5ybeYCam <- mutate(df5ybeYCam, Strain="ybeY", 
+                  Sample = "CAM",Date="2021-12-30")
+
+df5ybeYeryth <- read_delim("Data6/measurements_21-12-30_11-03-59.lvm", 
+    delim = "\t", escape_double = FALSE, 
+    locale = locale(decimal_mark = ",", grouping_mark = "."), 
+    trim_ws = TRUE, skip = 21,
+    col_select = c("Time", "Signal"))
+df5ybeYeryth <- mutate(df5ybeYeryth, Strain="ybeY", 
+                  Sample = "ERYTH",Date="2021-12-30")
+
+```
+
+```{r}
+ rbind(df5WT,df5WTCam,df5WTeryth) %>% ggplot()+
+    geom_line(aes(Time,Signal),size=1.5)+
+  facet_wrap(~Sample)+
+  labs(y="AU260", 
+       x="Time (second)", 
+       title="Sucrose Gradients of WT Keio strain") +
+   theme_bw()
+```
+```{r}
+ggsave("B1_WT Keio gradient.pdf", width = 6, height = 5)
+```
+
+```{r}
+ rbind(df5ybeY,df5ybeYCam,df5ybeYeryth) %>% ggplot()+
+    geom_line(aes(Time,Signal, color=Sample),size=1.5)+
+  facet_wrap(~Sample, scales="free_y")+
+  labs(y="AU260", 
+       x="Time (second)", 
+       title="Sucrose Gradients of ybeY deletion strain") +
+   theme_bw()
+```
+
+```{r}
+ggsave("B2_ybeY deletion gradient.pdf", width = 6, height = 5)
+```
 
