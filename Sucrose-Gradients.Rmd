@@ -17,7 +17,7 @@ library(readr)
 
 
 ```{r}
-WT1 <- read_delim("Data/measurements_21-11-30_08-52-11 WT Keio OD600 0_5.lvm", 
+WT1 <- read_delim("Measurements/Data0/measurements_21-11-30_08-52-11 WT Keio OD600 0_5.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -27,7 +27,7 @@ WT1 <- mutate(WT1, Strain="WT Keio", Sample = "exp1", Date="2021-11-30")
 ```
 
 ```{r}
-WT2 <- read_delim("Data/measurements_21-11-30_08-59-00 WT Keio OD600 0_5 plus 1hour.lvm", 
+WT2 <- read_delim("Measurements/Data0/measurements_21-11-30_08-59-00 WT Keio OD600 0_5 plus 1hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -36,7 +36,7 @@ WT2 <- mutate(WT2, Strain="WT Keio", Sample = "exp2", Date="2021-11-30")
 ```
 
 ```{r}
-WT3 <- read_delim("Data/measurements_21-11-30_09-04-59 WT Keio OD600 0_5 plus 2hours.lvm", 
+WT3 <- read_delim("Measurements/Data0/measurements_21-11-30_09-04-59 WT Keio OD600 0_5 plus 2hours.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -45,7 +45,7 @@ WT3 <- mutate(WT3, Strain="WT Keio", Sample = "stat1", Date="2021-11-30")
 ```
 
 ```{r}
-ybeX1 <- read_delim("Data/measurements_21-11-30_09-12-12 ybeX OD600 0_5.lvm",
+ybeX1 <- read_delim("Measurements/Data0/measurements_21-11-30_09-12-12 ybeX OD600 0_5.lvm",
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -54,7 +54,7 @@ ybeX1 <- mutate(ybeX1, Strain="ybeX", Sample = "exp1", Date="2021-11-30")
 ```
 
 ```{r}
-ybeX2 <- read_delim("Data/measurements_21-11-30_09-18-33 ybeX OD600 0_5 plus 1hour.lvm",
+ybeX2 <- read_delim("Measurements/Data0/measurements_21-11-30_09-18-33 ybeX OD600 0_5 plus 1hour.lvm",
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -62,7 +62,7 @@ ybeX2 <- read_delim("Data/measurements_21-11-30_09-18-33 ybeX OD600 0_5 plus 1ho
 ybeX2 <- mutate(ybeX2, Strain="ybeX", Sample = "exp2", Date="2021-11-30")
 ```
 ```{r}
-ybeX3 <- read_delim("Data/measurements_21-11-30_09-24-57 ybeX OD600 0_5 plus 2hours.lvm",
+ybeX3 <- read_delim("Measurements/Data0/measurements_21-11-30_09-24-57 ybeX OD600 0_5 plus 2hours.lvm",
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -85,7 +85,7 @@ rbind(WT3,ybeX3) %>% ggplot()+
 
 
 ```{r}
-ggsave(file = "WT ybeX gradients.pdf")
+ggsave(file = "PDFiles/WT ybeX gradients.pdf")
 ```
 
 ```{r}
@@ -199,12 +199,12 @@ data1 %>%
 ```
 
 ```{r}
-ggsave(file = "WT ybeX gradients quant.pdf", width = 5, height = 4)
+ggsave(file = "PDFiles/WT ybeX gradients quant.pdf", width = 5, height = 4)
 ```
 
 
 ```{r}
-WT37 <- read_delim("Data1/measurements_21-12-03_11-34-21 WT Keio 37C after OD600 0.55 2hour.lvm", 
+WT37 <- read_delim("Measurements/Data1/measurements_21-12-03_11-34-21 WT Keio 37C after OD600 0.55 2hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -214,7 +214,7 @@ WT37 <- mutate(WT37, Strain="WT Keio", Sample = "37C", Date="2021-12-03")
 ```
 
 ```{r}
-WT40 <- read_delim("Data1/measurements_21-12-03_11-42-09 WT Keio 40C after OD600 0.55 2hour.lvm", 
+WT40 <- read_delim("Measurements/Data1/measurements_21-12-03_11-42-09 WT Keio 40C after OD600 0.55 2hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -224,7 +224,7 @@ WT40 <- mutate(WT40, Strain="WT Keio", Sample = "40C", Date="2021-12-03")
 
 
 ```{r}
-ybeX37 <- read_delim("Data1/measurements_21-12-03_11-48-42 ybeX 37C after OD600 0.55 2hour.lvm", 
+ybeX37 <- read_delim("Measurements/Data1/measurements_21-12-03_11-48-42 ybeX 37C after OD600 0.55 2hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -234,7 +234,7 @@ ybeX37 <- mutate(ybeX37, Strain="ybeX", Sample = "37C", Date="2021-12-03")
 ```
 
 ```{r}
-ybeX40 <- read_delim("Data1/measurements_21-12-03_11-58-06 ybeX 40C after OD600 0.55 2hour.lvm", 
+ybeX40 <- read_delim("Measurements/Data1/measurements_21-12-03_11-58-06 ybeX 40C after OD600 0.55 2hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -245,7 +245,7 @@ ybeX40 <- mutate(ybeX40, Strain="ybeX", Sample = "40C", Date="2021-12-03")
 
 
 ```{r}
-ybeY37 <- read_delim("Data1/measurements_21-12-03_12-07-12 ybeY 37C after OD600 0.55 1hour.lvm", 
+ybeY37 <- read_delim("Measurements/Data1/measurements_21-12-03_12-07-12 ybeY 37C after OD600 0.55 1hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -255,7 +255,7 @@ ybeY37 <- mutate(ybeY37, Strain="ybeY", Sample = "37C", Date="2021-12-03")
 ```
 
 ```{r}
-ybeY40 <- read_delim("Data1/measurements_21-12-03_12-16-32 ybeY 40C after OD600 0.55 1hour.lvm", 
+ybeY40 <- read_delim("Measurements/Data1/measurements_21-12-03_12-16-32 ybeY 40C after OD600 0.55 1hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -276,7 +276,7 @@ ggplot(data=tempgradbind)+
 ```
 
 ```{r}
-WTv37 <- read_delim("Data1/measurements_21-12-04_09-25-32 WT Keio 37C after OD600 0.55 2hour.lvm", 
+WTv37 <- read_delim("Measurements/Data1/measurements_21-12-04_09-25-32 WT Keio 37C after OD600 0.55 2hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -286,7 +286,7 @@ WTv37 <- mutate(WTv37, Strain="WT Keio", Sample = "37C", Date="2021-12-04")
 ```
 
 ```{r}
-WTv40 <- read_delim("Data1/measurements_21-12-04_09-32-41 WT Keio 40C after OD600 0.55 2hour.lvm", 
+WTv40 <- read_delim("Measurements/Data1/measurements_21-12-04_09-32-41 WT Keio 40C after OD600 0.55 2hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -296,7 +296,7 @@ WTv40 <- mutate(WTv40, Strain="WT Keio", Sample = "40C", Date="2021-12-04")
 
 
 ```{r}
-ybeXv37 <- read_delim("Data1/measurements_21-12-04_09-39-02 ybeX 37C after OD600 0.55 2hour.lvm", 
+ybeXv37 <- read_delim("Measurements/Data1/measurements_21-12-04_09-39-02 ybeX 37C after OD600 0.55 2hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -306,7 +306,7 @@ ybeXv37 <- mutate(ybeXv37, Strain="ybeX", Sample = "37C", Date="2021-12-04")
 ```
 
 ```{r}
-ybeXv40 <- read_delim("Data1/measurements_21-12-04_09-47-56 ybeX 40C after OD600 0.55 2hour.lvm", 
+ybeXv40 <- read_delim("Measurements/Data1/measurements_21-12-04_09-47-56 ybeX 40C after OD600 0.55 2hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -317,7 +317,7 @@ ybeXv40 <- mutate(ybeXv40, Strain="ybeX", Sample = "40C", Date="2021-12-04")
 
 
 ```{r}
-ybeYv37 <- read_delim("Data1/measurements_21-12-04_09-57-43 ybeY 37C after OD600 0.55 1hour.lvm", 
+ybeYv37 <- read_delim("Measurements/Data1/measurements_21-12-04_09-57-43 ybeY 37C after OD600 0.55 1hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -327,7 +327,7 @@ ybeYv37 <- mutate(ybeYv37, Strain="ybeY", Sample = "37C", Date="2021-12-04")
 ```
 
 ```{r}
-ybeYv40 <- read_delim("Data1/measurements_21-12-04_10-06-29 ybeY 40C after OD600 0.55 1hour.lvm", 
+ybeYv40 <- read_delim("Measurements/Data1/measurements_21-12-04_10-06-29 ybeY 40C after OD600 0.55 1hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -345,8 +345,15 @@ tempgradbindall <- rbind(WT37, WT40, ybeX37, ybeX40, ybeY37, ybeY40,WTv37, WTv40
 ```{r}
 ggplot(data=tempgradbindall)+
     geom_line(aes(Time,Signal, color=Strain))+
-  facet_grid(Date~Sample)
+  facet_grid(Date~Sample)+
+  labs(x="Time(second)", y="AU260")+
+  theme_bw()
 ```
+
+```{r}
+ggsave(file = "TIFFile/sWT ybeY ybeX sucgrad 37C-40C.tiff", width = 6, height = 4)
+```
+
 
 ```{r}
 ggplot(data=ybeY37)+
@@ -421,7 +428,7 @@ data2 %>%
   group_by(Ribo,Strain) %>%
   summarise_at(vars(value), list(Mean=mean,SD=sd)) %>% ggplot() + 
   geom_col(aes(x=Strain, y=Mean, fill = Ribo), position = "dodge") +
-  geom_errorbar( aes(x=Strain, ymin=Mean-SD, ymax=Mean+SD), width=0.4, colour="black", alpha=0.9, size=1.3)+
+  geom_errorbar( aes(x=Strain, ymin=Mean-SD, ymax=Mean+SD), width=0.4, colour="black", alpha=0.9, size=1.3) +
   facet_wrap(~Ribo)
 ```
 
@@ -533,11 +540,11 @@ binddata2_3 %>%
 ```
 
 ```{r}
-ggsave(file = "WT ybeX gradients37_40.pdf")
+ggsave(file = "PDFiles/WT ybeX gradients37_40.pdf")
 ```
 
 ```{r}
-df1WT37 <- read_delim("Data2/measurements_21-12-16_09-13-57.lvm", 
+df1WT37 <- read_delim("Measurements/Data2/measurements_21-12-16_09-13-57.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -546,7 +553,7 @@ df1WT37 <- mutate(df1WT37, Strain="WT Keio",
                   Sample = "37C",Date="2021-12-16")
 ```
 ```{r}
-df1WT43 <- read_delim("Data2/measurements_21-12-16_09-19-52.lvm", 
+df1WT43 <- read_delim("Measurements/Data2/measurements_21-12-16_09-19-52.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -555,7 +562,7 @@ df1WT43 <- mutate(df1WT43, Strain="WT Keio",
                   Sample = "43C",Date="2021-12-16")
 ```
 ```{r}
-df1ybeX37 <- read_delim("Data2/measurements_21-12-16_09-25-34.lvm", 
+df1ybeX37 <- read_delim("Measurements/Data2/measurements_21-12-16_09-25-34.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -564,7 +571,7 @@ df1ybeX37 <- mutate(df1ybeX37, Strain="ybeX",
                   Sample = "37C",Date="2021-12-16")
 ```
 ```{r}
-df1ybeX43 <- read_delim("Data2/measurements_21-12-16_09-31-24.lvm", 
+df1ybeX43 <- read_delim("Measurements/Data2/measurements_21-12-16_09-31-24.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -574,7 +581,7 @@ df1ybeX43 <- mutate(df1ybeX43, Strain="ybeX",
 ```
 
 ```{r}
-df1ybeY37 <- read_delim("Data2/measurements_21-12-16_09-38-53.lvm", 
+df1ybeY37 <- read_delim("Measurements/Data2/measurements_21-12-16_09-38-53.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -583,7 +590,7 @@ df1ybeY37 <- mutate(df1ybeY37, Strain="ybeY",
                   Sample = "37C",Date="2021-12-16")
 ```
 ```{r}
-df1ybeY43 <- read_delim("Data2/measurements_21-12-16_09-45-05.lvm", 
+df1ybeY43 <- read_delim("Measurements/Data2/measurements_21-12-16_09-45-05.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -599,8 +606,8 @@ df1rbind <- rbind(df1ybeY37,df1ybeY43,df1WT37,df1WT43,df1ybeX37,df1ybeX43)
 
 ```{r}
 df1rbind %>% ggplot()+
-    geom_line(aes(Time,Signal, color=Sample))+
-    facet_wrap(~Strain)
+    geom_line(aes(Time,Signal, color=Sample), size=1)+
+    facet_wrap(Date~Strain)
 ```
 
 ```{r}
@@ -658,7 +665,7 @@ AUC(df1ybeY43$Time, df1ybeY43$Signal, from = min(50, na.rm = TRUE), to = max(90,
 
 ```
 ```{r}
-df2WT37 <- read_delim("Data3/measurements_21-12-22_09-50-34.lvm", 
+df2WT37 <- read_delim("Measurements/Data3/measurements_21-12-22_09-50-34.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -667,7 +674,7 @@ df2WT37 <- mutate(df2WT37, Strain="WT Keio",
                   Sample = "37C",Date="2021-12-22")
 ```
 ```{r}
-df2WT43 <- read_delim("Data3/measurements_21-12-22_09-56-24.lvm", 
+df2WT43 <- read_delim("Measurements/Data3/measurements_21-12-22_09-56-24.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -676,7 +683,7 @@ df2WT43 <- mutate(df2WT43, Strain="WT Keio",
                   Sample = "43C",Date="2021-12-22")
 ```
 ```{r}
-df2ybeX37 <- read_delim("Data3/measurements_21-12-22_10-02-27.lvm", 
+df2ybeX37 <- read_delim("Measurements/Data3/measurements_21-12-22_10-02-27.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -685,7 +692,7 @@ df2ybeX37 <- mutate(df2ybeX37, Strain="ybeX",
                   Sample = "37C",Date="2021-12-22")
 ```
 ```{r}
-df2ybeX43 <- read_delim("Data3/measurements_21-12-22_10-08-03.lvm", 
+df2ybeX43 <- read_delim("Measurements/Data3/measurements_21-12-22_10-08-03.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -694,7 +701,7 @@ df2ybeX43 <- mutate(df2ybeX43, Strain="ybeX",
                   Sample = "43C",Date="2021-12-22")
 ```
 ```{r}
-df2ybeY37 <- read_delim("Data3/measurements_21-12-22_10-15-20.lvm", 
+df2ybeY37 <- read_delim("Measurements/Data3/measurements_21-12-22_10-15-20.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -703,7 +710,7 @@ df2ybeY37 <- mutate(df2ybeY37, Strain="ybeY",
                   Sample = "37C",Date="2021-12-22")
 ```
 ```{r}
-df2ybeY43 <- read_delim("Data3/measurements_21-12-22_10-21-26.lvm", 
+df2ybeY43 <- read_delim("Measurements/Data3/measurements_21-12-22_10-21-26.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -718,7 +725,7 @@ df2rbind <- rbind(df2WT37,df2WT43,df2ybeX37,df2ybeX43,df2ybeY37,df2ybeY43)
 ```{r}
 df2rbind %>% ggplot()+
     geom_line(aes(Time,Signal, color=Sample))+
-    facet_wrap(~Strain)
+    facet_wrap(Date~Strain)
 ```
 
 ```{r}
@@ -727,13 +734,18 @@ library(cowplot)
 
 
 ```{r}
- df2rbind %>% ggplot()+
+ rbind(df2rbind, df1rbind) %>% ggplot()+
     geom_line(aes(Time,Signal, color=Strain))+
-    facet_wrap(~Sample)+
-  theme_cowplot()
+    facet_grid(Date~Sample)+
+  theme_bw()
 ```
 ```{r}
-df3WT <- read_delim("Data4/measurements_18-06-02_11-11-54 WT Keio 2hours after OD600 0_3.lvm", 
+ggsave("TIFFiles/WT ybeY ybeX sucgrad 37C-43C.tiff", width = 6, height = 5)
+```
+
+
+```{r}
+df3WT <- read_delim("Measurements/Data4/measurements_18-06-02_11-11-54 WT Keio 2hours after OD600 0_3.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -743,7 +755,7 @@ df3WT <- mutate(df3WT, Strain="WT",
 ```
 
 ```{r}
-df3WTCAM <- read_delim("Data4/measurements_18-06-02_11-18-46 WT Keio CAM 2hours.lvm", 
+df3WTCAM <- read_delim("Measurements/Data4/measurements_18-06-02_11-18-46 WT Keio CAM 2hours.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -752,7 +764,7 @@ df3WTCAM <- mutate(df3WTCAM, Strain="WT",
                   Sample = "CAM",Date="2018-06-02")
 ```
 ```{r}
-df3yjeQ <- read_delim("Data4/measurements_18-06-02_11-37-30 yjeQ 2hour plus OD600 0_3.lvm", 
+df3yjeQ <- read_delim("Measurements/Data4/measurements_18-06-02_11-37-30 yjeQ 2hour plus OD600 0_3.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -762,7 +774,7 @@ df3yjeQ <- mutate(df3yjeQ, Strain="yjeQ",
 ```
 
 ```{r}
-df3yjeQCAM <- read_delim("Data4/measurements_18-06-02_11-43-11 yjeQ CAM 2hour.lvm", 
+df3yjeQCAM <- read_delim("Measurements/Data4/measurements_18-06-02_11-43-11 yjeQ CAM 2hour.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -776,7 +788,7 @@ geom_line(aes(Time,Signal, color=Sample))+
   ggthemes::theme_pander()
 
 ```{r}
-df4WT <- read_delim("Data5/measurements_21-12-24_10-42-56.lvm", 
+df4WT <- read_delim("Measurements/Data5/measurements_21-12-24_10-42-56.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -784,7 +796,7 @@ df4WT <- read_delim("Data5/measurements_21-12-24_10-42-56.lvm",
 df4WT <- mutate(df4WT, Strain="WT", 
                   Sample = "2hourplus",Date="2021-12-24")
 
-df4WTCam <- read_delim("Data5/measurements_21-12-24_11-01-58.lvm", 
+df4WTCam <- read_delim("Measurements/Data5/measurements_21-12-24_11-01-58.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -792,7 +804,7 @@ df4WTCam <- read_delim("Data5/measurements_21-12-24_11-01-58.lvm",
 df4WTCam <- mutate(df4WTCam, Strain="WT", 
                   Sample = "CAM",Date="2021-12-24")
 
-df4yjeQ <- read_delim("Data5/measurements_21-12-24_10-48-46.lvm", 
+df4yjeQ <- read_delim("Measurements/Data5/measurements_21-12-24_10-48-46.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -800,7 +812,7 @@ df4yjeQ <- read_delim("Data5/measurements_21-12-24_10-48-46.lvm",
 df4yjeQ <- mutate(df4yjeQ, Strain="yjeQ", 
                   Sample = "2hourplus",Date="2021-12-24")
 
-df4yjeQCam <- read_delim("Data5/measurements_21-12-24_11-07-41.lvm", 
+df4yjeQCam <- read_delim("Measurements/Data5/measurements_21-12-24_11-07-41.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -808,7 +820,7 @@ df4yjeQCam <- read_delim("Data5/measurements_21-12-24_11-07-41.lvm",
 df4yjeQCam <- mutate(df4yjeQCam, Strain="yjeQ", 
                   Sample = "CAM",Date="2021-12-24")
 
-df4rbfA <- read_delim("Data5/measurements_21-12-24_10-54-53.lvm", 
+df4rbfA <- read_delim("Measurements/Data5/measurements_21-12-24_10-54-53.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -816,7 +828,7 @@ df4rbfA <- read_delim("Data5/measurements_21-12-24_10-54-53.lvm",
 df4rbfA <- mutate(df4rbfA, Strain="rbfA", 
                   Sample = "2hourplus",Date="2021-12-24")
 
-df4rbfACam <- read_delim("Data5/measurements_21-12-24_11-13-45.lvm", 
+df4rbfACam <- read_delim("Measurements/Data5/measurements_21-12-24_11-13-45.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -829,15 +841,16 @@ df4rbfACam <- mutate(df4rbfACam, Strain="rbfA",
 df4WT,df4WTCam,
 ```{r}
  rbind(df4yjeQ,df4yjeQCam) %>% ggplot()+
-    geom_line(aes(Time,Signal, color=Sample))+
-    facet_wrap(~Strain)+
+    geom_line(aes(Time,Signal, color=Sample), size=1.5)+
+    facet_wrap(~Sample, scales = "free_y",)+
+  labs(y="AU260", x="Time(Second)")+
   theme_cowplot()
 ```
 
 ```{r}
  rbind(df4rbfA,df4rbfACam) %>% ggplot()+
-    geom_line(aes(Time,Signal),size=1.5)+
-  facet_wrap(~Sample)+
+    geom_line(aes(Time,Signal, color=Sample),size=1.5)+
+  #facet_wrap(~Sample)+
   labs(y="AU260", 
        x="Time (second)", 
        title="Sucrose Gradients of RbfA Deletion strain") +
@@ -845,13 +858,13 @@ df4WT,df4WTCam,
 ```
 
 ```{r}
-ggsave("A1_rbfA deletion gradient.pdf", width = 6, height = 5)
+ggsave("PDFiles/A1_rbfA deletion gradient.pdf", width = 6, height = 5)
 ```
 
 ```{r}
  rbind(df4yjeQ,df4yjeQCam) %>% ggplot()+
-    geom_line(aes(Time,Signal),size=1.5)+
-  facet_wrap(~Sample)+
+    geom_line(aes(Time,Signal, color=Sample),size=1.5)+
+  #facet_wrap(~Sample)+
   labs(y="AU260", 
        x="Time (second)", 
        title="Sucrose Gradients of yjeQ Deletion strain") +
@@ -859,12 +872,12 @@ ggsave("A1_rbfA deletion gradient.pdf", width = 6, height = 5)
 ```
 
 ```{r}
-ggsave("A2_yjeQ deletion gradient.pdf", width = 6, height = 5)
+ggsave("PDFiles/A2_yjeQ deletion gradient.pdf", width = 6, height = 5)
 ```
 
 ```{r}
  rbind(df4WT,df4WTCam) %>% ggplot()+
-    geom_line(aes(Time,Signal),size=1.5)+
+    geom_line(aes(Time,Signal, color=Sample),size=1.5)+
   facet_wrap(~Sample)+
   labs(y="AU260", 
        x="Time (second)", 
@@ -872,11 +885,11 @@ ggsave("A2_yjeQ deletion gradient.pdf", width = 6, height = 5)
    theme_bw()
 ```
 ```{r}
-ggsave("A3_WT Keio gradient.pdf", width = 6, height = 5)
+ggsave("PDFiles/A3_WT Keio gradient.pdf", width = 6, height = 5)
 ```
 
 ```{r}
-df5WT <- read_delim("Data6/measurements_21-12-30_10-32-53.lvm", 
+df5WT <- read_delim("Measurements/Data6/measurements_21-12-30_10-32-53.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -884,7 +897,7 @@ df5WT <- read_delim("Data6/measurements_21-12-30_10-32-53.lvm",
 df5WT <- mutate(df5WT, Strain="WT", 
                   Sample = "2hourplus",Date="2021-12-30")
 
-df5WTCam <- read_delim("Data6/measurements_21-12-30_10-39-29.lvm", 
+df5WTCam <- read_delim("Measurements/Data6/measurements_21-12-30_10-39-29.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -892,7 +905,7 @@ df5WTCam <- read_delim("Data6/measurements_21-12-30_10-39-29.lvm",
 df5WTCam <- mutate(df5WTCam, Strain="WT", 
                   Sample = "CAM",Date="2021-12-30")
 
-df5WTeryth <- read_delim("Data6/measurements_21-12-30_10-45-15.lvm", 
+df5WTeryth <- read_delim("Measurements/Data6/measurements_21-12-30_10-45-15.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -900,7 +913,7 @@ df5WTeryth <- read_delim("Data6/measurements_21-12-30_10-45-15.lvm",
 df5WTeryth <- mutate(df5WTeryth, Strain="WT", 
                   Sample = "ERYTH",Date="2021-12-30")
 
-df5ybeY <- read_delim("Data6/measurements_21-12-30_10-52-03.lvm", 
+df5ybeY <- read_delim("Measurements/Data6/measurements_21-12-30_10-52-03.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -908,7 +921,7 @@ df5ybeY <- read_delim("Data6/measurements_21-12-30_10-52-03.lvm",
 df5ybeY <- mutate(df5ybeY, Strain="ybeY", 
                   Sample = "2hourplus",Date="2021-12-30")
 
-df5ybeYCam <- read_delim("Data6/measurements_21-12-30_10-58-01.lvm", 
+df5ybeYCam <- read_delim("Measurements/Data6/measurements_21-12-30_10-58-01.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -916,7 +929,7 @@ df5ybeYCam <- read_delim("Data6/measurements_21-12-30_10-58-01.lvm",
 df5ybeYCam <- mutate(df5ybeYCam, Strain="ybeY", 
                   Sample = "CAM",Date="2021-12-30")
 
-df5ybeYeryth <- read_delim("Data6/measurements_21-12-30_11-03-59.lvm", 
+df5ybeYeryth <- read_delim("Measurements/Data6/measurements_21-12-30_11-03-59.lvm", 
     delim = "\t", escape_double = FALSE, 
     locale = locale(decimal_mark = ",", grouping_mark = "."), 
     trim_ws = TRUE, skip = 21,
@@ -928,28 +941,29 @@ df5ybeYeryth <- mutate(df5ybeYeryth, Strain="ybeY",
 
 ```{r}
  rbind(df5WT,df5WTCam,df5WTeryth) %>% ggplot()+
-    geom_line(aes(Time,Signal),size=1.5)+
-  facet_wrap(~Sample)+
+    geom_line(aes(Time,Signal, color=Sample),size=1.5)+
+  #facet_wrap(~Sample)+
   labs(y="AU260", 
        x="Time (second)", 
        title="Sucrose Gradients of WT Keio strain") +
    theme_bw()
 ```
 ```{r}
-ggsave("B1_WT Keio gradient.pdf", width = 6, height = 5)
+ggsave("TIFFiles/B1_WT Keio gradient.tiff", width = 6, height = 5)
 ```
+
 
 ```{r}
  rbind(df5ybeY,df5ybeYCam,df5ybeYeryth) %>% ggplot()+
     geom_line(aes(Time,Signal, color=Sample),size=1.5)+
-  facet_wrap(~Sample, scales="free_y")+
+  #facet_wrap(~Sample, scales="free_y")+
   labs(y="AU260", 
-       x="Time (second)", 
+       x="Time(second)", 
        title="Sucrose Gradients of ybeY deletion strain") +
    theme_bw()
 ```
 
 ```{r}
-ggsave("B2_ybeY deletion gradient.pdf", width = 6, height = 5)
+ggsave("TIFFiles/B2_ybeY deletion gradient.tiff", width =9, height = 5)
 ```
 
