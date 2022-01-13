@@ -1026,7 +1026,8 @@ AUC(df4rbfA$Time, df4rbfA$Signal, from = min(135, na.rm = TRUE), to = max(200, n
 ```
 
 ```{r}
-write_delim(bindall,"Sucrose Grad 37C-40C-43C.csv")
+bindall$Strain <- str_replace_all(bindall$Strain, " Keio", "")
+write.csv(bindall,"Sucrose Grad 37C-40C-43C.csv")
 
 ```
 
