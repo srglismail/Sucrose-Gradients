@@ -16,6 +16,7 @@ library(readr)
 ```
 
 
+
 ```{r}
 WT1 <- read_delim("Measurements/Data0/measurements_21-11-30_08-52-11 WT Keio OD600 0_5.lvm", 
     delim = "\t", escape_double = FALSE, 
@@ -25,6 +26,36 @@ WT1 <- read_delim("Measurements/Data0/measurements_21-11-30_08-52-11 WT Keio OD6
 WT1 <- mutate(WT1, Strain="WT Keio", Sample = "exp1", Date="2021-11-30")
 
 ```
+
+
+
+andmed <- WT1
+attach(andmed)
+#tot_integral=sum(andmed[,2])-0.5*andmed[1,2]-0.5*andmed[length(andmed[,2]),2]
+#tot_integral
+integral1=0
+integral2=0
+integral3=0
+for(j in 1:1000){
+  integral1[j]=0
+  integral2[j]=0
+  integral3[j]=0
+  time1=50+runif(1,-5,5)
+  time2=110+runif(1,-5,5)
+  time3=160+runif(1,-5,5)
+  time4=200+runif(1,-5.5)
+  for(i in round(time1,0):round(time2,0))
+  {integral1[j]=integral1[j]+0.5*(andmed[i,2]+andmed[i+1,2])}
+  for(i in round(time2,0):round(time3,0))
+  {integral2[j]=integral2[j]+0.5*(andmed[i,2]+andmed[i+1,2])}
+  for(i in round(time3,0):round(time4,0))
+  {integral3[j]=integral3[j]+0.5*(andmed[i,2]+andmed[i+1,2])}
+}
+round(integral1,2)
+round(integral2,2)
+round(integral3,2)
+
+
 
 ```{r}
 WT2 <- read_delim("Measurements/Data0/measurements_21-11-30_08-59-00 WT Keio OD600 0_5 plus 1hour.lvm", 
@@ -274,6 +305,12 @@ ggplot(data=tempgradbind)+
     geom_line(aes(Time,Signal, color=Strain))+
   facet_wrap(~Sample)
 ```
+
+```{r}
+write.table(ybeX37, file = "ybeX37.txt", sep = "\t",
+            row.names = FALSE)
+```
+
 
 ```{r}
 WTv37 <- read_delim("Measurements/Data1/measurements_21-12-04_09-25-32 WT Keio 37C after OD600 0.55 2hour.lvm", 
@@ -783,9 +820,10 @@ df3yjeQCAM <- mutate(df3yjeQCAM, Strain="yjeQ",
                   Sample = "CAM",Date="2018-06-02")
 ```
 
-rbind(df3yjeQ,df3yjeQCAM) %>% ggplot()+
-geom_line(aes(Time,Signal, color=Sample))+
-  ggthemes::theme_pander()
+```{r}
+bindall <- rbind(WT37, WT40, WTv37, WTv40, ybeX37, ybeX40, ybeXv37, ybeXv40, df1WT37,df1WT43,df1ybeX37,df1ybeX43,df1ybeY37,df1ybeY43,df2WT37,df2WT43,df2ybeX37,df2ybeX43,df2ybeY37,df2ybeY43)
+```
+
 
 ```{r}
 df4WT <- read_delim("Measurements/Data5/measurements_21-12-24_10-42-56.lvm", 
@@ -965,5 +1003,30 @@ ggsave("TIFFiles/B1_WT Keio gradient.tiff", width = 6, height = 5)
 
 ```{r}
 ggsave("TIFFiles/B2_ybeY deletion gradient.tiff", width =9, height = 5)
+```
+
+
+
+```{r}
+ggplot(data=df4rbfACam)+
+  geom_line(aes(Time,Signal))+
+  geom_vline(xintercept = c(25,80,135,200))
+
+```
+```{r}
+##70S/50S for df4rbfA     25,80,135,200
+AUC(df4rbfA$Time, df4rbfA$Signal, from = min(25, na.rm = TRUE), to = max(80, na.rm = TRUE), method = c("trapezoid")) / AUC(df4rbfA$Time, df4rbfA$Signal, from = min(80, na.rm = TRUE), to = max(135, na.rm = TRUE), method = c("trapezoid"))
+
+##70S/30S for df4rbfA 
+AUC(df4rbfA$Time, df4rbfA$Signal, from = min(25, na.rm = TRUE), to = max(80, na.rm = TRUE), method = c("trapezoid")) / AUC(df4rbfA$Time, df4rbfA$Signal, from = min(135, na.rm = TRUE), to = max(200, na.rm = TRUE), method = c("trapezoid"))
+
+AUC(df4rbfA$Time, df4rbfA$Signal, from = min(25, na.rm = TRUE), to = max(80, na.rm = TRUE), method = c("trapezoid"))
+AUC(df4rbfA$Time, df4rbfA$Signal, from = min(80, na.rm = TRUE), to = max(135, na.rm = TRUE), method = c("trapezoid"))
+AUC(df4rbfA$Time, df4rbfA$Signal, from = min(135, na.rm = TRUE), to = max(200, na.rm = TRUE), method = c("trapezoid"))
+```
+
+```{r}
+write_delim(bindall,"Sucrose Grad 37C-40C-43C.csv")
+
 ```
 
