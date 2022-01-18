@@ -27,9 +27,33 @@ WT1 <- mutate(WT1, Strain="WT Keio", Sample = "exp1", Date="2021-11-30")
 
 ```
 
+```{r}
+
+a <- WT37 %>% select(-c(Strain, Sample, Date))
+write.csv(a, "dataWT37.csv", row.names = FALSE)
+
+b <- WT40 %>% select(-c(Strain, Sample, Date))
+write.csv(b, "dataWT40.csv", row.names = FALSE)
+
+c <- ybeX37 %>% select(-c(Strain, Sample, Date))
+write.csv(c, "dataybeX37.csv", row.names = FALSE)
+
+d <- ybeX40 %>% select(-c(Strain, Sample, Date))
+write.csv(d, "dataybeX40.csv", row.names = FALSE)
+
+e <- ybeY37 %>% select(-c(Strain, Sample, Date))
+write.csv(e, "dataybeY37.csv", row.names = FALSE)
+
+f <- ybeY40 %>% select(-c(Strain, Sample, Date))
+write.csv(f, "dataybeY40.csv", row.names = FALSE)
+
+```
 
 
-andmed <- WT1
+andmed=read.table('Margus code/signals1.txt', header=TRUE, sep="\t",dec=",")
+```{r}
+andism=read.csv("dataybeY40.csv")
+andmed=andism
 attach(andmed)
 #tot_integral=sum(andmed[,2])-0.5*andmed[1,2]-0.5*andmed[length(andmed[,2]),2]
 #tot_integral
@@ -40,10 +64,10 @@ for(j in 1:1000){
   integral1[j]=0
   integral2[j]=0
   integral3[j]=0
-  time1=50+runif(1,-5,5)
-  time2=110+runif(1,-5,5)
+  time1=60+runif(1,-5,5)
+  time2=105+runif(1,-5,5)
   time3=160+runif(1,-5,5)
-  time4=200+runif(1,-5.5)
+  time4=205+runif(1,-5.5)
   for(i in round(time1,0):round(time2,0))
   {integral1[j]=integral1[j]+0.5*(andmed[i,2]+andmed[i+1,2])}
   for(i in round(time2,0):round(time3,0))
@@ -54,6 +78,13 @@ for(j in 1:1000){
 round(integral1,2)
 round(integral2,2)
 round(integral3,2)
+```
+
+```{r}
+mean(integral1)
+mean(integral2)
+mean(integral3)
+```
 
 
 
@@ -306,10 +337,21 @@ ggplot(data=tempgradbind)+
   facet_wrap(~Sample)
 ```
 
-```{r}
+
+write.table(WT37, file = "WT37.txt", sep = "\t",
+            row.names = FALSE)
+write.table(WT40, file = "WT40.txt", sep = "\t",
+            row.names = FALSE)
 write.table(ybeX37, file = "ybeX37.txt", sep = "\t",
             row.names = FALSE)
-```
+write.table(ybeX40, file = "ybeX40.txt", sep = "\t",
+            row.names = FALSE)
+write.table(ybeY37, file = "ybeY37.txt", sep = "\t",
+            row.names = FALSE)
+write.table(ybeY40, file = "ybeY40.txt", sep = "\t",
+            row.names = FALSE)
+
+
 
 
 ```{r}
@@ -1028,6 +1070,52 @@ AUC(df4rbfA$Time, df4rbfA$Signal, from = min(135, na.rm = TRUE), to = max(200, n
 ```{r}
 bindall$Strain <- str_replace_all(bindall$Strain, " Keio", "")
 write.csv(bindall,"Sucrose Grad 37C-40C-43C.csv")
+
+```
+
+
+```{r}
+rbind(df4WT,df4WTCam,df4rbfA,df4rbfACam) %>% mutate(fct_relevel(Sample,"2hourplus","CAM")) %>%  ggplot(aes(Time, Signal)) + geom_line(size=1.5) + facet_wrap(Strain~Sample, scales="free_y")+
+  ggthemes::theme_tufte()+
+    scale_x_continuous(breaks = NULL)+
+  scale_y_continuous(breaks = NULL)+
+  xlab(NULL)+ ylab(NULL)+
+  theme(axis.title = element_text(size = 16, face = "bold"))
+ggsave("lastplot.tiff", plot = last_plot(), height = 6, width = 4, dpi = 750)
+```
+
+
+```{r}
+library(latticeExtra)
+rbfA <- xyplot(Signal ~ Time, df4rbfA, type = "l" , lwd=2, col="steelblue")
+rbfACam <- xyplot(Signal ~ Time, df4rbfACam, type = "l", lwd=2, col="#69b3a2")
+doubleYScale(rbfA, rbfACam, add.ylab2 = TRUE, use.style=FALSE )
+```
+
+```{r}
+df4WT %>% mutate(Signal=Signal*2.2) %>%  rbind(df4WTCam,df4rbfA,df4rbfACam) %>%  ggplot(aes(Time, Signal, linetype=Sample, color=Sample)) + geom_line(aes(alpha=Sample), size=1.5) + facet_wrap(~Strain, scales="free_y")+
+  ggthemes::theme_tufte()+
+  scale_alpha_manual(values =c(0.8,1))+
+  scale_linetype_manual(values = c("twodash", "solid"))+
+  scale_color_manual(values = c("gray0", "black"))+
+    scale_x_continuous(breaks = NULL)+
+  scale_y_continuous(breaks = NULL)+
+  xlab(NULL)+ ylab(NULL)+
+  theme(axis.title = element_text(size = 16, face = "bold"))
+ggsave("lastplot.tiff", plot = last_plot(), height = 4, width = 6, dpi = 750)
+```
+
+```{r}
+df5ybeY %>% mutate(Signal=Signal*2.2) %>% rbind(df4yjeQ,df4yjeQCam,df5ybeYCam) %>%  ggplot(aes(Time, Signal, linetype=Sample, color=Sample)) + geom_line(aes(alpha=Sample), size=1.5) + facet_wrap(~Strain, scales="free_y")+
+  ggthemes::theme_tufte()+
+  scale_alpha_manual(values =c(0.8,1))+
+  scale_linetype_manual(values = c("twodash", "solid"))+
+  scale_color_manual(values = c("gray0", "black"))+
+    scale_x_continuous(breaks = NULL)+
+  scale_y_continuous(breaks = NULL)+
+  xlab(NULL)+ ylab(NULL)+
+  theme(axis.title = element_text(size = 16, face = "bold"))
+ggsave("lastplot.tiff", plot = last_plot(), height = 4, width = 6, dpi = 750)
 
 ```
 
